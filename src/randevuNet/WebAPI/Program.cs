@@ -95,7 +95,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-if (app.Environment.IsProduction())
+//if (app.Environment.IsProduction())
     app.ConfigureCustomExceptionMiddleware();
 
 app.UseDbMigrationApplier();
