@@ -4,6 +4,7 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 
 namespace Application.Features.UserOperationClaims.Queries.GetById;
@@ -39,6 +40,7 @@ public class GetByIdUserOperationClaimQuery : IRequest<GetByIdUserOperationClaim
         {
             UserOperationClaim? userOperationClaim = await _userOperationClaimRepository.GetAsync(
                 predicate: b => b.Id.Equals(request.Id),
+                include: uoc => uoc.Include(uoc => uoc.User).Include(uoc => uoc.OperationClaim),
                 enableTracking: false,
                 cancellationToken: cancellationToken
             );

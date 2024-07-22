@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Application.Services.AuthenticatorService;
 using Application.Services.AuthService;
 using Application.Services.UsersService;
@@ -20,6 +20,24 @@ using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Mailing.MailKit;
 using NArchitecture.Core.Security.DependencyInjection;
 using NArchitecture.Core.Security.JWT;
+using Application.Services.Appointments;
+using Application.Services.AppointmentReports;
+using Application.Services.Cities;
+using Application.Services.Countries;
+using Application.Services.Departments;
+using Application.Services.Districts;
+using Application.Services.DoctorScheduleSlots;
+using Application.Services.Faqs;
+using Application.Services.Feedbacks;
+using Application.Services.Hospitals;
+using Application.Services.HospitalAddresses;
+using Application.Services.HospitalDepartments;
+using Application.Services.Quarters;
+using Application.Services.DoctorTitles;
+using Application.Services.Doctors;
+using Application.Services.Patients;
+using Application.Services.UserOperationClaims;
+using Application.Services.UserRoles;
 
 namespace Application;
 
@@ -61,6 +79,24 @@ public static class ApplicationServiceRegistration
 
         services.AddSecurityServices<Guid, int, Guid>(tokenOptions);
 
+        services.AddScoped<IAppointmentService, AppointmentManager>();
+        services.AddScoped<IAppointmentReportService, AppointmentReportManager>();
+        services.AddScoped<ICityService, CityManager>();
+        services.AddScoped<ICountryService, CountryManager>();
+        services.AddScoped<IDepartmentService, DepartmentManager>();
+        services.AddScoped<IDistrictService, DistrictManager>();
+        services.AddScoped<IDoctorScheduleSlotService, DoctorScheduleSlotManager>();
+        services.AddScoped<IFaqService, FaqManager>();
+        services.AddScoped<IFeedbackService, FeedbackManager>();
+        services.AddScoped<IHospitalService, HospitalManager>();
+        services.AddScoped<IHospitalAddressService, HospitalAddressManager>();
+        services.AddScoped<IHospitalDepartmentService, HospitalDepartmentManager>();
+        services.AddScoped<IQuarterService, QuarterManager>();
+        services.AddScoped<IDoctorTitleService, DoctorTitleManager>();
+        services.AddScoped<IDoctorService, DoctorManager>();
+        services.AddScoped<IPatientService, PatientManager>();
+        services.AddScoped<IUserOperationClaimService, UserUserOperationClaimManager>();
+        services.AddScoped<IUserRoleService, UserRoleManager>();
         return services;
     }
 

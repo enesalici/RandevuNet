@@ -9,6 +9,10 @@ public class GetByIdUserResponse : IResponse
     public string LastName { get; set; }
     public string Email { get; set; }
     public bool Status { get; set; }
+    public int UserRoleID { get; set; }
+    public string UserRoleName { get; set; }
+
+
 
     public GetByIdUserResponse()
     {

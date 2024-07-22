@@ -3,6 +3,7 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
@@ -43,6 +44,7 @@ public class GetListUserQuery : IRequest<GetListResponse<GetListUserListItemDto>
         )
         {
             IPaginate<User> users = await _userRepository.GetListAsync(
+                include:u=>u.Include(u=> u.UserRole),
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
                 enableTracking: false,

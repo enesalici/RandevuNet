@@ -4,6 +4,7 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 
 namespace Application.Features.Users.Queries.GetById;
@@ -31,6 +32,7 @@ public class GetByIdUserQuery : IRequest<GetByIdUserResponse>, ISecuredRequest
         {
             User? user = await _userRepository.GetAsync(
                 predicate: b => b.Id.Equals(request.Id),
+                include: u => u.Include(u => u.UserRole),
                 enableTracking: false,
                 cancellationToken: cancellationToken
             );

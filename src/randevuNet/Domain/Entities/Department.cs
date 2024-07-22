@@ -6,5 +6,4 @@ public class Department : Entity<int>
     public string Name { get; set; }
 
     public virtual ICollection<Hospital_Department> HospitalDepartments { get; set; }
-    public virtual ICollection<Doctor> Doctors { get; set; }
 }

@@ -15,8 +15,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.Email).HasColumnName("Email").IsRequired();
         builder.Property(u => u.PasswordSalt).HasColumnName("PasswordSalt").IsRequired();
         builder.Property(u => u.PasswordHash).HasColumnName("PasswordHash").IsRequired();
+        builder.Property(u => u.FirstName).HasColumnName("FirstName").IsRequired();
+        builder.Property(u => u.LastName).HasColumnName("LastName").IsRequired();
         builder.Property(u => u.AuthenticatorType).HasColumnName("AuthenticatorType").IsRequired();
         builder.Property(u => u.CreatedDate).HasColumnName("CreatedDate").IsRequired();
+        builder.Property(u => u.PhoneNumber).HasColumnName("PhoneNumber");
         builder.Property(u => u.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(u => u.DeletedDate).HasColumnName("DeletedDate");
 
@@ -48,7 +51,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                     Id = AdminId,
                     Email = "admin@randevu.net",
                     PasswordHash = passwordHash,
-                    PasswordSalt = passwordSalt
+                    PasswordSalt = passwordSalt,
+                    FirstName = "Admin",
+                    LastName = "User",
+                    UserRoleID = 1
+                    
                 };
             yield return adminUser;
         }

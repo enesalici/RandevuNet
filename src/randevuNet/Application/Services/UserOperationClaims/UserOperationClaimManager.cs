@@ -75,6 +75,22 @@ public class UserUserOperationClaimManager : IUserOperationClaimService
         return addedUserOperationClaim;
     }
 
+    public async Task<ICollection<UserOperationClaim>> AddRangeAsync(ICollection<UserOperationClaim> userUserOperationClaims)
+    {
+        foreach (var item in userUserOperationClaims)
+        {
+            await _userUserOperationClaimBusinessRules.UserShouldNotHasOperationClaimAlreadyWhenInsert(
+            item.UserId,
+            item.OperationClaimId
+        );
+        }
+        
+
+        var addedUserOperationClaims = await _userUserOperationClaimRepository.AddRangeAsync(userUserOperationClaims);
+
+        return addedUserOperationClaims;
+    }
+
     public async Task<UserOperationClaim> UpdateAsync(UserOperationClaim userUserOperationClaim)
     {
         await _userUserOperationClaimBusinessRules.UserShouldNotHasOperationClaimAlreadyWhenUpdated(

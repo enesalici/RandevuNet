@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using NArchitecture.Core.Persistence.Repositories;
+using Nest;
 using Persistence.Contexts;
 
 namespace Persistence.Repositories;
@@ -22,4 +23,11 @@ public class UserOperationClaimRepository
             .ToListAsync();
         return operationClaims;
     }
+
+    //public async Task AddDefaultOperationClaims(Guid userID)
+    //{
+       
+
+    //}
+
 }

@@ -9,6 +9,8 @@ public class UpdatedUserFromAuthResponse : IResponse
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Email { get; set; }
+    public int UserRoleID { get; set; }
+
     public AccessToken AccessToken { get; set; }
 
     public UpdatedUserFromAuthResponse()

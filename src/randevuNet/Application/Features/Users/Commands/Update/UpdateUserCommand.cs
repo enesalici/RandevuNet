@@ -17,6 +17,8 @@ public class UpdateUserCommand : IRequest<UpdatedUserResponse>, ISecuredRequest
     public string LastName { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
+    public int UserRoleID { get; set; }
+
 
     public UpdateUserCommand()
     {

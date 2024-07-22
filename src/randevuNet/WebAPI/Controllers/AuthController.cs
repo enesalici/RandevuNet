@@ -7,6 +7,7 @@ using Application.Features.Auth.Commands.RevokeToken;
 using Application.Features.Auth.Commands.VerifyEmailAuthenticator;
 using Application.Features.Auth.Commands.VerifyOtpAuthenticator;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NArchitecture.Core.Application.Dtos;
@@ -27,6 +28,19 @@ public class AuthController : BaseController
             ?? throw new NullReferenceException($"\"{configurationSection}\" section cannot found in configuration.");
     }
 
+    [HttpPost("AutoLogin")]
+    public async Task<string> Login()
+    {
+        var userForLoginDto = new UserForLoginDto() { Email="admin@randevu.net",Password="Admin123!"};
+        LoginCommand loginCommand = new() { UserForLoginDto = userForLoginDto, IpAddress = getIpAddress() };
+        LoggedResponse result = await Mediator.Send(loginCommand);
+
+        if (result.RefreshToken is not null)
+            setRefreshTokenToCookie(result.RefreshToken);
+
+        return result.AccessToken.Token;
+    }
+
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
     {
@@ -38,7 +52,7 @@ public class AuthController : BaseController
 
         return Ok(result.ToHttpResponse());
     }
-
+    
     [HttpPost("Register")]
     public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto)
     {

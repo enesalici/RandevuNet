@@ -20,8 +20,19 @@ public class MappingProfiles : Profile
         CreateMap<UserOperationClaim, UpdatedUserOperationClaimResponse>().ReverseMap();
         CreateMap<UserOperationClaim, DeleteUserOperationClaimCommand>().ReverseMap();
         CreateMap<UserOperationClaim, DeletedUserOperationClaimResponse>().ReverseMap();
-        CreateMap<UserOperationClaim, GetByIdUserOperationClaimResponse>().ReverseMap();
-        CreateMap<UserOperationClaim, GetListUserOperationClaimListItemDto>().ReverseMap();
+
+        CreateMap<UserOperationClaim, GetByIdUserOperationClaimResponse>()
+             .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.User.FirstName))
+            .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
+
+        CreateMap<UserOperationClaim, GetListUserOperationClaimListItemDto>()
+            .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.User.FirstName))
+            .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
+
+        //.AfterMap((src, dest) => dest.User.FirstName = src.FirstName);
+
         CreateMap<IPaginate<UserOperationClaim>, GetListResponse<GetListUserOperationClaimListItemDto>>().ReverseMap();
     }
 }

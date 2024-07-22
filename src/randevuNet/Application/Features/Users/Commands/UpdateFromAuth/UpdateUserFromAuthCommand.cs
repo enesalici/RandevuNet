@@ -14,6 +14,8 @@ public class UpdateUserFromAuthCommand : IRequest<UpdatedUserFromAuthResponse>
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Password { get; set; }
+    public int UserRoleID { get; set; }
+
     public string? NewPassword { get; set; }
 
     public UpdateUserFromAuthCommand()

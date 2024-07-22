@@ -8,4 +8,6 @@ public class Hospital_Department : Entity<int>
 
     public virtual Hospital Hospital { get; set; }
     public virtual Department Department { get; set; }
+    public virtual ICollection<Doctor> Doctors { get; set; }
+
 }

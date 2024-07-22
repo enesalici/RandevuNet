@@ -26,7 +26,9 @@ public interface IUserOperationClaimService
         CancellationToken cancellationToken = default
     );
 
+
     Task<UserOperationClaim> AddAsync(UserOperationClaim userOperationClaim);
+    Task<ICollection<UserOperationClaim>> AddRangeAsync(ICollection<UserOperationClaim> userUserOperationClaims);
     Task<UserOperationClaim> UpdateAsync(UserOperationClaim userOperationClaim);
     Task<UserOperationClaim> DeleteAsync(UserOperationClaim userOperationClaim, bool permanent = false);
 }

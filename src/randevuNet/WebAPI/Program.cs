@@ -8,6 +8,7 @@ using NArchitecture.Core.CrossCuttingConcerns.Logging.Configurations;
 using NArchitecture.Core.ElasticSearch.Models;
 using NArchitecture.Core.Localization.WebApi;
 using NArchitecture.Core.Mailing;
+using NArchitecture.Core.Mailing.MailKit;
 using NArchitecture.Core.Persistence.WebApi;
 using NArchitecture.Core.Security.Encryption;
 using NArchitecture.Core.Security.JWT;
@@ -31,6 +32,7 @@ builder.Services.AddApplicationServices(
     tokenOptions: builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>()
         ?? throw new InvalidOperationException("TokenOptions section cannot found in configuration.")
 );
+
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddInfrastructureServices();
 builder.Services.AddHttpContextAccessor();
@@ -82,6 +84,8 @@ builder.Services.AddSwaggerGen(opt =>
     );
     opt.OperationFilter<BearerSecurityRequirementOperationFilter>();
 });
+
+
 
 WebApplication app = builder.Build();
 

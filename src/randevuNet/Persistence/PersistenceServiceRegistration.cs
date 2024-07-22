@@ -1,7 +1,8 @@
-﻿using Application.Services.Repositories;
+using Application.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NArchitecture.Core.Mailing.MailKit;
 using NArchitecture.Core.Persistence.DependencyInjection;
 using Persistence.Contexts;
 using Persistence.Repositories;
@@ -22,6 +23,24 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
 
+        services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+        services.AddScoped<IAppointmentReportRepository, AppointmentReportRepository>();
+        services.AddScoped<ICityRepository, CityRepository>();
+        services.AddScoped<ICountryRepository, CountryRepository>();
+        services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+        services.AddScoped<IDistrictRepository, DistrictRepository>();
+        services.AddScoped<IDoctorScheduleSlotRepository, DoctorScheduleSlotRepository>();
+        services.AddScoped<IFaqRepository, FaqRepository>();
+        services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+        services.AddScoped<IHospitalRepository, HospitalRepository>();
+        services.AddScoped<IHospitalAddressRepository, HospitalAddressRepository>();
+        services.AddScoped<IHospitalDepartmentRepository, HospitalDepartmentRepository>();
+        services.AddScoped<IQuarterRepository, QuarterRepository>();
+        services.AddScoped<IDoctorTitleRepository, DoctorTitleRepository>();
+        services.AddScoped<IDoctorRepository, DoctorRepository>();
+        services.AddScoped<IPatientRepository, PatientRepository>();
+
+        services.AddScoped<IUserRoleRepository, UserRoleRepository>();
         return services;
     }
 }
